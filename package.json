@@ -1,0 +1,144 @@
+{
+  "name": "snippet-hub",
+  "displayName": "Snippet Hub",
+  "description": "Extensions for React, Redux, Mongoose",
+  "version": "0.0.1",
+  "icon": "./public/images/sniper.svg",
+  "publisher": "phuc",
+  "keywords": [
+    "snippets",
+    "react",
+    "redux",
+    "mongoose",
+    "customizable",
+    "javascript",
+    "typescript",
+    "prettier"
+  ],
+  "engines": {
+    "vscode": "^1.81.0"
+  },
+  "categories": [
+    "Snippets",
+    "Other"
+  ],
+  "extensionKind": [
+    "ui",
+    "workspace"
+  ],
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "activationEvents": [
+    "onLanguage:typescript",
+    "onLanguage:typescriptReact",
+    "onLanguage:javascript",
+    "onLanguage:javascriptReact",
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "reactSnippets.search",
+        "title": "Snippet search"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "reactSnippets.search",
+        "key": "ctrl+alt+r",
+        "mac": "shift+cmd+r",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Snippet Hub",
+      "properties": {
+        "reactSnippets.settings.prettierEnabled": {
+          "type": "boolean",
+          "markdownDescription": "[EXPERIMENTAL: MIGHT NOT WORK]: Integrate prettier settings with code generated from snippets.",
+          "default": false
+        },
+        "reactSnippets.settings.importReactOnTop": {
+          "type": "boolean",
+          "markdownDescription": "Controls if snippets should add `import React from 'react';` at the top of components.\nUse if you have React +17 and use jsx transform.",
+          "default": true
+        },
+        "reactSnippets.settings.typescript": {
+          "type": "boolean",
+          "markdownDescription": "Controls if React components have typescript Props typing.",
+          "default": true
+        },
+        "reactSnippets.settings.languageScopes": {
+          "type": "string",
+          "markdownDescription": "defines the language scopes for which the snippets will be available.\nUse comma separated values.\nFor example: `typescript,typescriptreact,javascript,javascriptreact`",
+          "default": "typescript,typescriptreact,javascript,javascriptreact"
+        },
+        "reactSnippets.settings.typescriptPropsStatePrefix": {
+          "type": "string",
+          "markdownDescription": "Controls which prefix for typescript snippets should use for props/state.",
+          "default": "type",
+          "enum": [
+            "type",
+            "interface"
+          ]
+        }
+      }
+    },
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./out/snippets/generated.json"
+      },
+      {
+        "language": "javascriptreact",
+        "path": "./out/snippets/generated.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./out/snippets/generated.json"
+      },
+      {
+        "language": "typescriptreact",
+        "path": "./out/snippets/generated.json"
+      }
+    ]
+  },
+  "main": "./out/extension.js",
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "20.2.5",
+    "@types/prettier": "^3.0.0",
+    "@types/vscode": "^1.81.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/parser": "^5.59.8",
+    "@vscode/test-electron": "^2.3.2",
+    "eslint": "^8.41.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.1.3"
+  },
+  "prettier": {
+    "bracketSameLine": false,
+    "bracketSpacing": true,
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all",
+    "useTabs": false,
+    "endOfLine": "auto"
+  }
+}
